@@ -7,8 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mpesa_flutter_plugin/mpesa_flutter_plugin.dart';
 
-import 'api_caller.dart';
-
 class PaymentsPage extends StatefulWidget {
   const PaymentsPage({super.key});
 
@@ -132,11 +130,13 @@ class _PaymentsPageState extends State<PaymentsPage> {
                 child: Text("Complete payments via M-PESA"),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom:10.0),
+                padding: const EdgeInsets.only(bottom: 10.0),
                 child: Text(
                   "Prefix the number in the international format (254...)",
-                  style:
-                      GoogleFonts.montserrat(fontSize: 15, color: Colors.black,),
+                  style: GoogleFonts.montserrat(
+                    fontSize: 15,
+                    color: Colors.black,
+                  ),
                 ),
               ),
               phoneField(),

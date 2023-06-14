@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:fastrucks2/pages/Maps/current_location.dart';
-import 'package:fastrucks2/pages/Maps/map_screen.dart';
 import 'package:flutter/material.dart';
 
 class MapHome extends StatefulWidget {

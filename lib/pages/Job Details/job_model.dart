@@ -14,6 +14,7 @@ class JobModel {
   String? jobDescription;
   String? source;
   String? destination;
+  String? contactPerson;
 
   DateTime? dateSelected;
 
@@ -24,7 +25,8 @@ class JobModel {
       this.jobDescription,
       this.source,
       this.destination,
-      this.dateSelected});
+      this.dateSelected,
+      this.contactPerson});
 
   factory JobModel.fromMap(map) {
     return JobModel(
@@ -34,7 +36,8 @@ class JobModel {
         jobDescription: map['jobDescription'],
         source: map['Delivered From'],
         destination: map['Delivered To'],
-        dateSelected: map['dateSelected']);
+        dateSelected: map['dateSelected'],
+        contactPerson: map['supplierName']);
   }
 
   Map<String, dynamic> toMap() {
@@ -46,6 +49,7 @@ class JobModel {
       'delivered From': source,
       'delivered To': destination,
       'jobDescription': jobDescription,
+      'supplierName': contactPerson,
     };
   }
 }

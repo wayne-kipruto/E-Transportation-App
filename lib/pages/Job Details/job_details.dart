@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fastrucks2/pages/Job%20Details/job_destination.dart';
 import 'package:fastrucks2/pages/Job%20Details/job_model.dart';
 import 'package:fastrucks2/user/browse_trucks.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -30,6 +29,7 @@ class _JobDetailsPageState extends State<JobDetailsPage> {
   final vehicleSelected = TextEditingController();
   final destController = TextEditingController();
   final sourceController = TextEditingController();
+  final contactController = TextEditingController();
 
   JobModel jobModel = JobModel();
   final _auth = FirebaseAuth.instance;
@@ -39,6 +39,9 @@ class _JobDetailsPageState extends State<JobDetailsPage> {
     goodsSelected.dispose();
     vehicleSelected.dispose();
     goodsDescription.dispose();
+    destController.dispose();
+    sourceController.dispose();
+    contactController.dispose();
 
     FirebaseFirestore.instance
         .collection('users')
@@ -60,6 +63,7 @@ class _JobDetailsPageState extends State<JobDetailsPage> {
     jobModel.source = sourceController.text;
     jobModel.destination = destController.text;
     jobModel.jobDescription = goodsDescription.text;
+    jobModel.contactPerson = contactController.text;
 
     await firebaseFirestore
         .collection('jobDetails')
@@ -70,14 +74,21 @@ class _JobDetailsPageState extends State<JobDetailsPage> {
         .showSnackBar(const SnackBar(content: Text('Job Saved')));
   }
 
+  // List<String> goods = [
+  //   'Perishables (Foodstuffs...)',
+  //   'Fragile Goods (Glassware, Tiles etc...)',
+  //   'Construction Materials (Cement, Metal Rods, Sand etc...)',
+  //   'Household items (Couches, Fridges, TV, Beds etc...)',
+  //   'Other...(Specify below)',
+  // ];
   List<String> goods = [
-    'Perishables (Flour,Potatoes etc...)',
-    'Fragile Goods (Glassware, Tiles etc...)',
-    'Construction Materials (Cement, Metal Rods, Sand etc...)',
-    'Household items (Couches, Fridges, TV, Beds etc...)',
+    'Perishables ',
+    'Fragile Goods ',
+    'Construction Materials ',
+    'Household items ',
     'Other...(Specify below)',
   ];
-  String dropdownValue = 'Perishables (Flour,Potatoes etc...)';
+  String dropdownValue = 'Perishables ';
 
   String dropdownValue2 = 'Flatbed';
 
@@ -121,6 +132,10 @@ class _JobDetailsPageState extends State<JobDetailsPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: contactPerson(),
+            ),
             SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.only(
@@ -142,30 +157,33 @@ class _JobDetailsPageState extends State<JobDetailsPage> {
               ),
             ),
             SizedBox(height: 20),
-            DropdownButton<String>(
-              alignment: AlignmentDirectional.center,
-              dropdownColor: Colors.white,
-              iconSize: 24,
-              elevation: 15,
-              onChanged: (String? newValue) {
-                setState(() {
-                  dropdownValue = newValue!;
-                });
-              },
-              value: dropdownValue,
-              items: goods.map<DropdownMenuItem<String>>(
-                (String goodsValue) {
-                  return DropdownMenuItem<String>(
-                    value: goodsValue,
-                    child: Text(goodsValue,
-                        style: GoogleFonts.rubik(fontSize: 15)),
-                  );
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: DropdownButton<String>(
+                alignment: AlignmentDirectional.center,
+                dropdownColor: Colors.white,
+                iconSize: 24,
+                elevation: 15,
+                onChanged: (String? newValue) {
+                  setState(() {
+                    dropdownValue = newValue!;
+                  });
                 },
-              ).toList(),
+                value: dropdownValue,
+                items: goods.map<DropdownMenuItem<String>>(
+                  (String goodsValue) {
+                    return DropdownMenuItem<String>(
+                      value: goodsValue,
+                      child: Text(goodsValue,
+                          style: GoogleFonts.rubik(fontSize: 15)),
+                    );
+                  },
+                ).toList(),
+              ),
             ),
             SizedBox(height: 20),
             Padding(
-              padding: const EdgeInsets.only(top: 15),
+              padding: const EdgeInsets.only(top: 15, right: 5, left: 5),
               child: Text(
                 "Select the preferred vehicle type ",
                 style: GoogleFonts.montserrat(
@@ -345,6 +363,25 @@ class _JobDetailsPageState extends State<JobDetailsPage> {
               : IconButton(
                   icon: Icon(Icons.close),
                   onPressed: () => destController.clear(),
+                ),
+          border: OutlineInputBorder(),
+        ),
+        keyboardType: TextInputType.text,
+        textInputAction: TextInputAction.done,
+      );
+  Widget contactPerson() => TextField(
+        controller: destController,
+        decoration: InputDecoration(
+          label: Text(
+            'Supplier Name:',
+            style: GoogleFonts.montserrat(fontSize: 16),
+          ),
+          prefixIcon: Icon(Icons.description),
+          suffixIcon: contactController.text.isEmpty
+              ? Container(width: 0)
+              : IconButton(
+                  icon: Icon(Icons.close),
+                  onPressed: () => contactController.clear(),
                 ),
           border: OutlineInputBorder(),
         ),

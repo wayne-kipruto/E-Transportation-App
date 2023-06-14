@@ -8,7 +8,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:image_picker/image_picker.dart';
 
 class TransporterSettings extends StatefulWidget {
   const TransporterSettings({super.key});
@@ -22,8 +21,6 @@ class _TransporterSettingsState extends State<TransporterSettings> {
   TextEditingController ageController = TextEditingController();
   TextEditingController vehicleController = TextEditingController();
   TextEditingController mobileController = TextEditingController();
-
-  final ImagePicker _picker = ImagePicker();
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   User? user = FirebaseAuth.instance.currentUser;
@@ -295,14 +292,5 @@ class _TransporterSettingsState extends State<TransporterSettings> {
 
     ScaffoldMessenger.of(context)
         .showSnackBar(const SnackBar(content: Text('Data Updated ')));
-  }
-
-  void pickImage() async {
-    final image = await ImagePicker().pickImage(
-      source: ImageSource.gallery,
-      maxWidth: 512,
-      maxHeight: 512,
-      imageQuality: 75,
-    );
   }
 }

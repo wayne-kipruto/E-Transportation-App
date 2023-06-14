@@ -4,7 +4,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fastrucks2/pages/Chats/Chat_screen.dart';
 import 'package:fastrucks2/pages/Chats/Chat_search.dart';
-import 'package:fastrucks2/pages/Chats/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -23,7 +22,7 @@ class _ChatHomeState extends State<ChatHome> {
 
   @override
   Widget build(BuildContext context) {
-    final user = FirebaseAuth.instance.currentUser!;
+    // final user = FirebaseAuth.instance.currentUser!;
     return Scaffold(
       appBar: AppBar(
         title: Text("Welcome to your chats page"),

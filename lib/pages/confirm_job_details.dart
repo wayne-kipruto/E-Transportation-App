@@ -1,4 +1,3 @@
-import 'package:fastrucks2/pages/Maps/map_home.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 

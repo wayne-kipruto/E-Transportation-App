@@ -1,9 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_interpolation_to_compose_strings
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fastrucks2/pages/Chats/Chat_screen.dart';
 import 'package:fastrucks2/pages/Chats/Chat_search.dart';
-import 'package:fastrucks2/pages/Chats/chat_home.dart';
 import 'package:fastrucks2/pages/Job%20Details/view_jobs_model.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -60,7 +58,7 @@ class _ViewJobsState extends State<ViewJobs> {
                     itemExtent: 100,
                     itemBuilder: (_, i) {
                       final data = docs[i].data();
-                      DocumentSnapshot userData = snapshot.data!.docs[i];
+                      // DocumentSnapshot userData = snapshot.data!.docs[i];
 
                       return Padding(
                         padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),

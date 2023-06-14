@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:fastrucks2/pages/Job%20Details/job_model.dart';
 import 'package:flutter/material.dart';
 
 class JobSummary extends StatefulWidget {

@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fastrucks2/pages/Chats/user_model.dart';
 import 'package:fastrucks2/pages/widgets/message_text_field.dart';
 import 'package:fastrucks2/pages/widgets/single_msg.dart';
 import 'package:firebase_auth/firebase_auth.dart';
