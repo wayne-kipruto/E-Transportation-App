@@ -2,7 +2,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fastrucks2/pages/transporter/driver_vetting_page.dart';
-import 'package:fastrucks2/user/user_verification_page.dart';
+import 'package:fastrucks2/supplier/user_verification_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 

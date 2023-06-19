@@ -66,7 +66,11 @@ class _ViewTrucksState extends State<ViewTrucks> {
                           title: Text(
                             "Name: " + data['name'] + "\n Age: " + data['age'],
                           ),
-                          subtitle: Text("Vehicle Type: " + data['vehicle']),
+                          subtitle: Text("Vehicle Type: " + data['vehicle']
+                              // +
+                              // "\n Truck Image: " +
+                              // data['image']
+                              ),
                           trailing: IconButton(
                             onPressed: () {
                               Navigator.push(

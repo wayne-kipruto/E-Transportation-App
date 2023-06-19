@@ -2,7 +2,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fastrucks2/pages/Job%20Details/location_model.dart';
-import 'package:fastrucks2/user/browse_trucks.dart';
+import 'package:fastrucks2/supplier/browse_trucks.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

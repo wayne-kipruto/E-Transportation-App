@@ -3,7 +3,7 @@
 import 'dart:async';
 
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
-import 'package:fastrucks2/pages/confirm_job_details.dart';
+import 'package:fastrucks2/pages/Job Details/confirm_job_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_google_places/flutter_google_places.dart';
 import 'package:geolocator/geolocator.dart';

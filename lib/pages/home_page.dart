@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fastrucks2/pages/widgets/get_user_name.dart';
 import 'package:fastrucks2/pages/about_us.dart';
 
-import 'package:fastrucks2/user/user_profile.dart';
-import 'package:fastrucks2/user/user_verification_page.dart';
+import 'package:fastrucks2/supplier/user_profile.dart';
+import 'package:fastrucks2/supplier/user_verification_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';

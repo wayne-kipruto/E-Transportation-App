@@ -2,8 +2,8 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fastrucks2/pages/widgets/upload_files_function.dart';
-import 'package:fastrucks2/user/business_info_model.dart';
-import 'package:fastrucks2/user/user_profile.dart';
+import 'package:fastrucks2/supplier/business_info_model.dart';
+import 'package:fastrucks2/supplier/user_profile.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;

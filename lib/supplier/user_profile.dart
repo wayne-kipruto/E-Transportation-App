@@ -2,7 +2,8 @@
 
 import 'package:fastrucks2/pages/Chats/chat_home.dart';
 import 'package:fastrucks2/payments/payments.dart';
-import 'package:fastrucks2/user/user_settings_page.dart';
+import 'package:fastrucks2/supplier/active_jobs.dart';
+import 'package:fastrucks2/supplier/user_settings_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
@@ -79,7 +80,7 @@ class _UserProfileState extends State<UserProfile> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ViewTrucks(),
+                        builder: (context) => ActiveJobs(),
                       ));
                 },
                 child: Container(
@@ -96,7 +97,7 @@ class _UserProfileState extends State<UserProfile> {
                         color: Colors.black,
                       ),
                       Text(
-                        'View Truckers',
+                        'View My Jobs ',
                         style: GoogleFonts.rubik(
                             fontSize: 25, color: Colors.black),
                       )
@@ -130,36 +131,6 @@ class _UserProfileState extends State<UserProfile> {
                         style: GoogleFonts.rubik(
                             fontSize: 25, color: Colors.black),
                       )
-                    ],
-                  ),
-                ),
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => UserSettingsPage(),
-                      ));
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: Colors.orange[200],
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.settings,
-                        size: 50,
-                        color: Colors.black,
-                      ),
-                      Text(
-                        'My Settings',
-                        style: GoogleFonts.rubik(
-                            fontSize: 25, color: Colors.black),
-                      ),
                     ],
                   ),
                 ),
@@ -273,6 +244,36 @@ class _UserProfileState extends State<UserProfile> {
               ),
               InkWell(
                 onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => UserSettingsPage(),
+                      ));
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.orange[200],
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.settings,
+                        size: 50,
+                        color: Colors.black,
+                      ),
+                      Text(
+                        'My Settings',
+                        style: GoogleFonts.rubik(
+                            fontSize: 25, color: Colors.black),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              InkWell(
+                onTap: () {
                   FirebaseAuth.instance.signOut();
                   Navigator.pushReplacement(context,
                       MaterialPageRoute(builder: (context) => LoginPage1()));
@@ -299,7 +300,6 @@ class _UserProfileState extends State<UserProfile> {
                   ),
                 ),
               ),
-              
             ],
           ),
         ),

@@ -3,7 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fastrucks2/auth/old_auth/auth_page.dart';
 import 'package:fastrucks2/pages/transporter/driver_profile.dart';
-import 'package:fastrucks2/user/user_profile.dart';
+import 'package:fastrucks2/supplier/user_profile.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

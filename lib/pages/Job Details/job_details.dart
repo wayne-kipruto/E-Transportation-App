@@ -2,12 +2,10 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fastrucks2/pages/Job%20Details/job_model.dart';
-import 'package:fastrucks2/user/browse_trucks.dart';
+import 'package:fastrucks2/supplier/browse_trucks.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import 'job_summary.dart';
 
 class JobDetailsPage extends StatefulWidget {
   const JobDetailsPage({super.key});
@@ -149,11 +147,11 @@ class _JobDetailsPageState extends State<JobDetailsPage> {
             ),
             SizedBox(height: 10),
             Padding(
-              padding: const EdgeInsets.only(top: 30.0),
+              padding: const EdgeInsets.only(top: 20.0, left: 10, right: 10),
               child: Text(
-                "Select the type of goods to be transported",
+                "Goods to be transported",
                 style: GoogleFonts.montserrat(
-                    fontSize: 18, fontWeight: FontWeight.bold),
+                    fontSize: 17, fontWeight: FontWeight.bold),
               ),
             ),
             SizedBox(height: 20),
@@ -264,41 +262,52 @@ class _JobDetailsPageState extends State<JobDetailsPage> {
                   child: destinationLocation(),
                 ),
 
-                MaterialButton(
-                  color: Colors.orange[300],
-                  onPressed: () {
-                    addJob();
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return ViewTrucks();
-                    }));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Text(
-                      'Select Transporter',
-                      style:
-                          GoogleFonts.rubik(fontSize: 15, color: Colors.black),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    MaterialButton(
+                      color: Colors.orange[300],
+                      onPressed: () {
+                        // addJob(); Add Job to firebase Function
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return ViewTrucks();
+                        }));
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Text(
+                          'Select Transporter',
+                          style: GoogleFonts.rubik(
+                              fontSize: 15, color: Colors.black),
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-                MaterialButton(
-                  color: Colors.orange[300],
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return JobSummary();
-                    }));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Text(
-                      'View Job Summary',
-                      style:
-                          GoogleFonts.rubik(fontSize: 15, color: Colors.black),
+                    SizedBox(
+                      width: 20,
                     ),
-                  ),
+                    MaterialButton(
+                      color: Colors.orange[300],
+                      onPressed: () {
+                        addJob();
+                        // Navigator.push(context,
+                        //     MaterialPageRoute(builder: (context) {
+                        //   return JobSummary();
+                        // }));
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Text(
+                          'Save Job',
+                          style: GoogleFonts.rubik(
+                              fontSize: 15, color: Colors.black),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
+
                 SizedBox(
                   height: 20,
                 )
