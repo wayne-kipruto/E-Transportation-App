@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_interpolation_to_compose_strings
 
+import 'dart:html';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fastrucks2/pages/Job%20Details/myjobsmodel.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -49,69 +51,72 @@ class _ActiveJobsState extends State<ActiveJobs> {
         child: StreamBuilder(
           stream: FirebaseFirestore.instance
               .collection('users')
-              .doc(user.uid)
-              .collection('myJobs')
-              .doc(user.uid)
+              .doc(myJobsModel.uid)
               .snapshots(),
-          builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-            if (!snapshot.hasData) {
-              return const Text('Loading...');
-            }
-            return ListView.builder(
-              itemCount: snapshot.data!.docs.length,
-              itemBuilder: (BuildContext context, int index) {
-                final DocumentSnapshot data = snapshot.data!.docs[index];
-                return Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
-                    child: ListTile(
-                      dense: false,
-                      visualDensity: VisualDensity(vertical: 4),
-                      title: Text(
-                        "Goods " +
-                            data['goodsSelected'] + // the records in firebase
-                            "\nInfo:" +
-                            data['jobDescription'] +
-                            "\nVehicle Selected: " +
-                            data['vehicleSelected'],
-                        style: GoogleFonts.montserrat(fontSize: 11),
-                      ),
-                      subtitle: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 8.0,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Center(child: CircularProgressIndicator());
+            } else if (snapshot.hasError) {
+              return Center(child: Text('Error'));
+            } else {
+              var document = snapshot.data!.docs;
+              return ListView.builder(
+                itemCount: snapshot.data!.document,
+                itemBuilder: (BuildContext context, int index) {
+                  final DocumentSnapshot data = snapshot.data!.docs[index];
+                  return Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: ListTile(
+                        dense: false,
+                        visualDensity: VisualDensity(vertical: 4),
+                        title: Text(
+                          "Goods " +
+                              data['goodsSelected'] + // the records in firebase
+                              "\nInfo:" +
+                              data['jobDescription'] +
+                              "\nVehicle Selected: " +
+                              data['vehicleSelected'],
+                          style: GoogleFonts.montserrat(fontSize: 11),
                         ),
-                        child: Text("From:" +
-                            data['delieved From'] +
-                            "To:" +
-                            data['delievered To']),
-                      ),
-                      trailing: IconButton(
-                        onPressed: () {
-                          //function to send info to transporters active jobs
-                          ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text('Job Rejected')));
-                        },
-                        icon: Icon(
-                          Icons.cancel_outlined,
-                          color: Colors.red,
+                        subtitle: Padding(
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 8.0,
+                          ),
+                          child: Text("From:" +
+                              data['delieved From'] +
+                              "To:" +
+                              data['delievered To']),
                         ),
-                      ),
-                      leading: IconButton(
-                        onPressed: () {
-                          //function to remove info from their screen
-                          ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text('Job Accepted')));
-                        },
-                        icon: Icon(
-                          Icons.check_circle_outline,
-                          color: Colors.lightGreenAccent,
+                        trailing: IconButton(
+                          onPressed: () {
+                            //function to send info to transporters active jobs
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text('Job Rejected')));
+                          },
+                          icon: Icon(
+                            Icons.cancel_outlined,
+                            color: Colors.red,
+                          ),
+                        ),
+                        leading: IconButton(
+                          onPressed: () {
+                            //function to remove info from their screen
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text('Job Accepted')));
+                          },
+                          icon: Icon(
+                            Icons.check_circle_outline,
+                            color: Colors.lightGreenAccent,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                );
-              },
-            );
+                  );
+                },
+              );
+            }
+            //
           },
         ),
       ),
