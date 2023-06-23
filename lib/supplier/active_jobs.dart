@@ -1,31 +1,34 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_interpolation_to_compose_strings
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fastrucks2/pages/Job%20Details/myjobsmodel.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../pages/Job Details/job_destination.dart';
-import '../pages/Job Details/view_jobs_model.dart';
-
 class ActiveJobs extends StatefulWidget {
-  const ActiveJobs({super.key});
+  final user = FirebaseAuth.instance.currentUser!;
+
+  ActiveJobs({super.key});
 
   @override
   State<ActiveJobs> createState() => _ActiveJobsState();
 }
 
 class _ActiveJobsState extends State<ActiveJobs> {
-  User? user = FirebaseAuth.instance.currentUser!;
-  ViewJobsModel jobsModel = ViewJobsModel();
+  final user = FirebaseAuth.instance.currentUser!;
+  MyJobsModel myJobsModel = MyJobsModel();
+
   @override
   void initState() {
     FirebaseFirestore.instance
-        .collection('jobDetails')
-        .doc(user!.uid)
+        .collection('users')
+        .doc(user.uid)
+        .collection('myJobs')
+        .doc(user.uid)
         .get()
         .then((value) {
-      jobsModel = ViewJobsModel.fromMap(value.data());
+      myJobsModel = MyJobsModel.fromMap(value.data());
     });
     super.initState();
   }
@@ -34,66 +37,83 @@ class _ActiveJobsState extends State<ActiveJobs> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('My Jobs'),
+        title: Text(
+          'My Jobs',
+          style: GoogleFonts.rubik(fontSize: 15),
+        ),
+        backgroundColor: Colors.orange[200],
+        centerTitle: true,
       ),
       body: Padding(
         padding: EdgeInsets.only(left: 15, right: 15, top: 20, bottom: 20),
-        child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-            stream:
-                FirebaseFirestore.instance.collection('jobDetails').snapshots(),
-            builder: (_, snapshot) {
-              if (snapshot.hasError) {
-                return Text('Error = ${snapshot.error}');
-              }
-              if (snapshot.hasData) {
-                final docs = snapshot.data!.docs;
+        child: StreamBuilder(
+          stream: FirebaseFirestore.instance
+              .collection('users')
+              .doc(user.uid)
+              .collection('myJobs')
+              .doc(user.uid)
+              .snapshots(),
+          builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+            if (!snapshot.hasData) {
+              return const Text('Loading...');
+            }
+            return ListView.builder(
+              itemCount: snapshot.data!.docs.length,
+              itemBuilder: (BuildContext context, int index) {
+                final DocumentSnapshot data = snapshot.data!.docs[index];
                 return Expanded(
-                  child: ListView.builder(
-                    itemCount: docs.length,
-                    itemExtent: 100,
-                    itemBuilder: (_, i) {
-                      final data = docs[i].data();
-                      // DocumentSnapshot userData = snapshot.data!.docs[i];
-
-                      return Padding(
-                        padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
-                        child: ListTile(
-                          dense: false,
-                          visualDensity: const VisualDensity(vertical: 4),
-                          title: Text(
-                            "Job Type: " +
-                                data['goodsSelected'] +
-                                "\nInfo: " +
-                                data['jobDescription'] +
-                                "\nVehicle Type: " +
-                                data['vehicleSelected'],
-                            style: GoogleFonts.rubik(fontSize: 11),
-                          ),
-                          subtitle: Padding(
-                            padding: const EdgeInsets.only(top: 10, bottom: 10),
-                            child: Text(
-                                'From: ' +
-                                    data['delivered From'] +
-                                    "\nTo: " +
-                                    data['delivered To']
-                                // +
-                                // "\nDelivery Date: " +
-                                // data['dateSelected'],
-                                ,
-                                style: GoogleFonts.rubik(
-                                    fontSize: 12, fontWeight: FontWeight.bold)),
-                          ),
-                          trailing: Text('Job Status'),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    child: ListTile(
+                      dense: false,
+                      visualDensity: VisualDensity(vertical: 4),
+                      title: Text(
+                        "Goods " +
+                            data['goodsSelected'] + // the records in firebase
+                            "\nInfo:" +
+                            data['jobDescription'] +
+                            "\nVehicle Selected: " +
+                            data['vehicleSelected'],
+                        style: GoogleFonts.montserrat(fontSize: 11),
+                      ),
+                      subtitle: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 8.0,
                         ),
-                      );
-                    },
+                        child: Text("From:" +
+                            data['delieved From'] +
+                            "To:" +
+                            data['delievered To']),
+                      ),
+                      trailing: IconButton(
+                        onPressed: () {
+                          //function to send info to transporters active jobs
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text('Job Rejected')));
+                        },
+                        icon: Icon(
+                          Icons.cancel_outlined,
+                          color: Colors.red,
+                        ),
+                      ),
+                      leading: IconButton(
+                        onPressed: () {
+                          //function to remove info from their screen
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text('Job Accepted')));
+                        },
+                        icon: Icon(
+                          Icons.check_circle_outline,
+                          color: Colors.lightGreenAccent,
+                        ),
+                      ),
+                    ),
                   ),
                 );
-              }
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            }),
+              },
+            );
+          },
+        ),
       ),
     );
   }
