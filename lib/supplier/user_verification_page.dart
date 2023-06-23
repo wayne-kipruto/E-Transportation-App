@@ -6,11 +6,8 @@ import 'package:fastrucks2/supplier/business_info_model.dart';
 import 'package:fastrucks2/supplier/user_profile.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:image_picker/image_picker.dart';
 
 class UserVerificationPage extends StatefulWidget {
   @override
@@ -21,7 +18,7 @@ final user = FirebaseAuth.instance.currentUser!;
 CollectionReference ref = FirebaseFirestore.instance.collection('suppInfo');
 Widget _title() {
   return Text(
-    'Supplier Verification Page (${user.email!})',
+    'Supplier Verification Page (${user.displayName})',
     style: GoogleFonts.rubik(fontSize: 15, color: Colors.black),
   );
 }
@@ -45,35 +42,15 @@ Widget _afterheader() {
 
 Widget _header() {
   return Column(
-    mainAxisAlignment: MainAxisAlignment.start,
+    mainAxisAlignment: MainAxisAlignment.center,
+    crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Text(
-        "Welcome and thank you for choosing FasTrucks. Before you can start using this service, we have to verify a few things...",
+        "Welcome and thank you for choosing FasTrucks. \n\nBefore you can start using this service, we have to verify a few things.\n\nKindly provide the following information:\n",
         style: GoogleFonts.rubik(fontSize: 15),
       ),
-      SizedBox(
-        height: 5,
-      ),
       Text(
-        "(-) First, We have to ascertain the nature of your business as we only do business with valid suppliers.",
-        style: GoogleFonts.rubik(fontSize: 15),
-      ),
-      SizedBox(
-        height: 5,
-      ),
-      Text(
-          "(-) Therefore, we require you to submit the following details regarding your business.",
-          style: GoogleFonts.rubik(fontSize: 15)),
-      SizedBox(
-        height: 5,
-      ),
-      Text(
-          "NOTE! Once you select the picture, it will automatically upload your file.",
-          style: GoogleFonts.rubik(fontSize: 15, color: Colors.red[500])),
-      SizedBox(
-        height: 5,
-      ),
-      Text("Ensure that your documents are named appropriately.",
+          "NOTE! Once you select the picture, it will automatically upload your file.\n\n Ensure that your documents are named appropriately. ",
           style: GoogleFonts.rubik(fontSize: 15, color: Colors.red[500])),
       SizedBox(
         height: 30,
@@ -128,15 +105,6 @@ class _UserVerificationPageState extends State<UserVerificationPage> {
 
     // Navigator.pushReplacement(
     //     context, MaterialPageRoute(builder: (context) => UserProfile()));
-  }
-
-  void pickImage() async {
-    final image = await ImagePicker().pickImage(
-      source: ImageSource.gallery,
-      maxWidth: 512,
-      maxHeight: 512,
-      imageQuality: 75,
-    );
   }
 
   @override
@@ -249,7 +217,8 @@ class _UserVerificationPageState extends State<UserVerificationPage> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 10, top: 10),
-                    child: ElevatedButton(
+                    child: MaterialButton(
+                      color: Colors.orange[200],
                       onPressed: (() async {
                         final results = await FilePicker.platform.pickFiles(
                           allowMultiple: false,
@@ -279,7 +248,8 @@ class _UserVerificationPageState extends State<UserVerificationPage> {
                       }),
                       child: Text(
                         'Upload Business Certificate ',
-                        style: GoogleFonts.rubik(fontSize: 15),
+                        style: GoogleFonts.rubik(
+                            fontSize: 15, color: Colors.black),
                       ),
                     ),
                   ),
@@ -297,13 +267,13 @@ class _UserVerificationPageState extends State<UserVerificationPage> {
                       onPressed: () async {
                         await savetofirebase();
                       },
-                      color: Colors.blue,
+                      color: Colors.orange[200],
                       child: Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10.0),
                         child: Text(
                           'Submit Info',
                           style: GoogleFonts.rubik(
-                              fontSize: 15, color: Colors.white),
+                              fontSize: 15, color: Colors.black),
                         ),
                       ),
                     ),
@@ -318,13 +288,13 @@ class _UserVerificationPageState extends State<UserVerificationPage> {
                           return const UserProfile();
                         }));
                       },
-                      color: Colors.blue,
+                      color: Colors.orange[200],
                       child: Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10.0),
                         child: Text('Proceed to profile ',
                             style: GoogleFonts.rubik(
                               fontSize: 15,
-                              color: Colors.white,
+                              color: Colors.black,
                             )),
                       ),
                     ),

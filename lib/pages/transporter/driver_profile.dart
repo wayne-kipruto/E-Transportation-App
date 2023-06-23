@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:fastrucks2/pages/transporter/myjobs.dart';
 import 'package:fastrucks2/pages/transporter/transporter_settings_page.dart';
+import 'package:fastrucks2/supplier/active_jobs.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -60,6 +62,38 @@ class _DriverProfileState extends State<DriverProfile> {
                       'View Inbox',
                       style: GoogleFonts.montserrat(
                           fontSize: 25, color: Colors.white),
+                    )
+                  ],
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MyJobs(),
+                    ));
+              },
+              child: Container(
+                width: 200,
+                height: 200,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.grey[400],
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.play_for_work,
+                      size: 38,
+                      color: Colors.black,
+                    ),
+                    Text(
+                      ' My Active Jobs ',
+                      style:
+                          GoogleFonts.rubik(fontSize: 19, color: Colors.black),
                     )
                   ],
                 ),

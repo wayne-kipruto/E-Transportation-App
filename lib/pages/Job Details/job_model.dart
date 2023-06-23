@@ -8,7 +8,6 @@ class JobModel {
   int get hashCode => name.hashCode;
 
   String? userId;
-
   String? goodsSelected;
   String? vehicleSelected;
   String? jobDescription;

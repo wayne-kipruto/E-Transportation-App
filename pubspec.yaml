@@ -53,7 +53,7 @@ dependencies:
   device_info_plus: ^8.0.0
   get: ^4.6.5
   package_info_plus: ^3.0.1
-  google_sign_in: ^5.4.2
+  google_sign_in: ^6.1.4
   http: ^0.13.5
   
   json_serializable: ^6.5.4

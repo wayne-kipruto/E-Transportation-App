@@ -6,6 +6,7 @@ import 'package:fastrucks2/supplier/browse_trucks.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:fastrucks2/pages/Job Details/myjobsmodel.dart';
 
 class JobDetailsPage extends StatefulWidget {
   const JobDetailsPage({super.key});
@@ -30,7 +31,10 @@ class _JobDetailsPageState extends State<JobDetailsPage> {
   final contactController = TextEditingController();
 
   JobModel jobModel = JobModel();
+  MyJobsModel myJobsModel = MyJobsModel();
+
   final _auth = FirebaseAuth.instance;
+  final user = FirebaseAuth.instance.currentUser!;
 
   @override
   void dispose() {
@@ -43,11 +47,33 @@ class _JobDetailsPageState extends State<JobDetailsPage> {
 
     FirebaseFirestore.instance
         .collection('users')
-        .doc(jobModel.userId)
+        .doc(user.uid)
+        .collection('myJobs')
+        .doc(user.uid)
         .get()
-        .then((value) => jobModel = JobModel());
+        .then((value) => myJobsModel = MyJobsModel());
     setState(() {});
     super.dispose();
+  }
+
+  addJobToMyJobs() async {
+    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+    User? user = _auth.currentUser;
+    myJobsModel.goodsSelected = dropdownValue;
+    myJobsModel.destination = destController.text;
+    myJobsModel.source = sourceController.text;
+    myJobsModel.userId = user!.uid;
+    myJobsModel.jobDescription = goodsDescription.text;
+    myJobsModel.vehicleSelected = dropdownValue2;
+    // myJobsModel.dateSelected = _dateTime;
+    myJobsModel.contactPerson = contactController.text;
+
+    await firebaseFirestore
+        .collection('users')
+        .doc(user.uid)
+        .collection('myJobs')
+        .doc(myJobsModel.userId)
+        .set(myJobsModel.toMap());
   }
 
   addJob() async {
@@ -290,7 +316,9 @@ class _JobDetailsPageState extends State<JobDetailsPage> {
                     MaterialButton(
                       color: Colors.orange[300],
                       onPressed: () {
+                        addJobToMyJobs();
                         addJob();
+
                         // Navigator.push(context,
                         //     MaterialPageRoute(builder: (context) {
                         //   return JobSummary();
@@ -379,13 +407,13 @@ class _JobDetailsPageState extends State<JobDetailsPage> {
         textInputAction: TextInputAction.done,
       );
   Widget contactPerson() => TextField(
-        controller: destController,
+        controller: contactController,
         decoration: InputDecoration(
           label: Text(
             'Supplier Name:',
             style: GoogleFonts.montserrat(fontSize: 16),
           ),
-          prefixIcon: Icon(Icons.description),
+          prefixIcon: Icon(Icons.person),
           suffixIcon: contactController.text.isEmpty
               ? Container(width: 0)
               : IconButton(

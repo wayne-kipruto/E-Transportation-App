@@ -15,7 +15,7 @@ class ViewJobs extends StatefulWidget {
 }
 
 class _ViewJobsState extends State<ViewJobs> {
-  User? user = FirebaseAuth.instance.currentUser!;
+  User? user = FirebaseAuth.instance.currentUser;
   ViewJobsModel jobsModel = ViewJobsModel();
 
   @override
@@ -52,6 +52,7 @@ class _ViewJobsState extends State<ViewJobs> {
               }
               if (snapshot.hasData) {
                 final docs = snapshot.data!.docs;
+
                 return Expanded(
                   child: ListView.builder(
                     itemCount: docs.length,
@@ -61,18 +62,20 @@ class _ViewJobsState extends State<ViewJobs> {
                       // DocumentSnapshot userData = snapshot.data!.docs[i];
 
                       return Padding(
-                        padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+                        padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
                         child: ListTile(
                           dense: false,
-                          visualDensity: const VisualDensity(vertical: 4),
+                          visualDensity: const VisualDensity(vertical: 3),
                           title: Text(
-                            "Job Type: " +
+                            "Contact:" +
+                                data['supplierName'] +
+                                "\nGoods: " +
                                 data['goodsSelected'] +
                                 "\nInfo: " +
                                 data['jobDescription'] +
-                                "\nVehicle Type: " +
+                                "\nVehicle : " +
                                 data['vehicleSelected'],
-                            style: GoogleFonts.rubik(fontSize: 11),
+                            style: GoogleFonts.rubik(fontSize: 12),
                           ),
                           subtitle: Padding(
                             padding: const EdgeInsets.only(top: 10, bottom: 10),
@@ -86,17 +89,29 @@ class _ViewJobsState extends State<ViewJobs> {
                                 // data['dateSelected'],
                                 ,
                                 style: GoogleFonts.rubik(
-                                    fontSize: 11, fontWeight: FontWeight.bold)),
+                                    fontSize: 13, fontWeight: FontWeight.bold)),
                           ),
                           trailing: IconButton(
                             onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => SearchScreen(),
-                                  ));
+                              //function to send info to transporters active jobs
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text('Job Rejected')));
                             },
-                            icon: Icon(Icons.message),
+                            icon: Icon(
+                              Icons.cancel_outlined,
+                              color: Colors.red,
+                            ),
+                          ),
+                          leading: IconButton(
+                            onPressed: () {
+                              //function to remove info from their screen
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text('Job Accepted')));
+                            },
+                            icon: Icon(
+                              Icons.check_circle_outline,
+                              color: Colors.lightGreenAccent,
+                            ),
                           ),
                         ),
                       );

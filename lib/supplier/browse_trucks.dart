@@ -58,7 +58,7 @@ class _ViewTrucksState extends State<ViewTrucks> {
                       itemExtent: 100,
                       itemBuilder: (_, i) {
                         final data = docs[i].data();
-                        DocumentSnapshot userData = snapshot.data!.docs[i];
+                        // DocumentSnapshot userData = snapshot.data!.docs[i];
 
                         return ListTile(
                           dense: false,

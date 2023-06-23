@@ -6,7 +6,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:image_picker/image_picker.dart';
 
 class UserSettingsPage extends StatefulWidget {
   const UserSettingsPage({super.key});
@@ -24,7 +23,6 @@ class _UserSettingsPageState extends State<UserSettingsPage> {
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  final ImagePicker _picker = ImagePicker();
   SupplierModel supplierModel = SupplierModel();
 
   @override

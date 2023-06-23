@@ -1,46 +1,52 @@
-class ViewJobsModel {
+class MyJobsModel {
   String names = "some";
 
   @override
   bool operator ==(Object other) =>
-      other is ViewJobsModel && other.names == names;
+      other is MyJobsModel && other.names == names;
 
   @override
   int get hashCode => names.hashCode;
 
+  String? userId;
   String? goodsSelected;
   String? vehicleSelected;
   String? jobDescription;
   String? destination;
   String? source;
-  DateTime? dateSelected;
+  String? contactPerson;
+  // DateTime? dateSelected;
 
-  ViewJobsModel(
+  MyJobsModel(
       {this.goodsSelected,
       this.vehicleSelected,
       this.jobDescription,
       this.destination,
       this.source,
-      this.dateSelected});
-
-  factory ViewJobsModel.fromMap(map) {
-    return ViewJobsModel(
+      this.userId,
+      // this.dateSelected,
+      this.contactPerson});
+  factory MyJobsModel.fromMap(map) {
+    return MyJobsModel(
         goodsSelected: map['goodsSelected'],
         vehicleSelected: map['vehicleSelected'],
         jobDescription: map['jobDescription'],
-        dateSelected: map['dateSelected'],
         source: map['delivered To'],
-        destination: map['delivered From']);
+        destination: map['delivered From'],
+        userId: map['userId'],
+        // dateSelected: map['dateSelected'],
+        contactPerson: map['supplierName']);
   }
-
   Map<String, dynamic> toMap() {
     return {
       'goodsSelected': goodsSelected,
       'vehicle': vehicleSelected,
       'mobile': jobDescription,
-      'dateSelected': dateSelected,
       'delivered To': source,
-      'delivered From': destination
+      'delivered From': destination,
+      'userId': userId,
+      'supplierName': contactPerson,
+      // 'dateSelected': dateSelected,
     };
   }
 }

@@ -12,7 +12,6 @@ import 'package:google_fonts/google_fonts.dart';
 import '../auth/new auth/signin_page.dart';
 import '../pages/Job Details/job_details.dart';
 import '../pages/Maps/select_location.dart';
-import 'browse_trucks.dart';
 
 class UserProfile extends StatefulWidget {
   const UserProfile({super.key});
