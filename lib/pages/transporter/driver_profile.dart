@@ -2,7 +2,6 @@
 
 import 'package:fastrucks2/pages/transporter/myjobs.dart';
 import 'package:fastrucks2/pages/transporter/transporter_settings_page.dart';
-import 'package:fastrucks2/supplier/active_jobs.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
