@@ -469,6 +469,7 @@ class _RegisterPageState extends State<RegisterPage> {
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((value) =>
               {postDetailsToFirestore(name, email, role, age, mobile)})
+          // ignore: body_might_complete_normally_catch_error
           .catchError((e) {});
     }
   }

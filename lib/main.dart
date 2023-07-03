@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'package:mpesa_flutter_plugin/mpesa_flutter_plugin.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'auth/new auth/signin_page.dart';
 import 'firebase_options.dart';
 
@@ -14,14 +15,22 @@ Future<void> main() async {
   MpesaFlutterPlugin.setConsumerSecret('10zU1CgwvxM4Jtxz');
 
   WidgetsFlutterBinding.ensureInitialized();
+
+  final prefs = await SharedPreferences.getInstance();
+  final showLogin = prefs.getBool('showLogin') ?? false;
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(MyApp());
+  runApp(MyApp(showLogin: showLogin));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final bool showLogin;
+  const MyApp({
+    Key? key,
+    required this.showLogin,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,8 +45,8 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSwatch()
             .copyWith(secondary: const Color.fromARGB(255, 129, 106, 87)),
       ),
-      home: LoginPage1(),
-      // home: IntroScreen(),
+      //home: LoginPage1(),
+      home: showLogin ? LoginPage1() : OnboardingPage(),
     );
   }
 }

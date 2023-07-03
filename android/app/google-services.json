@@ -1,46 +1,11 @@
 {
   "project_info": {
     "project_number": "446742646174",
+    "firebase_url": "https://fastrucks1-230a1-default-rtdb.firebaseio.com",
     "project_id": "fastrucks1-230a1",
     "storage_bucket": "fastrucks1-230a1.appspot.com"
   },
   "client": [
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:446742646174:android:60cfd9cf7e8b7b9e581a8f",
-        "android_client_info": {
-          "package_name": "com.example.fastrucks1"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "446742646174-louiqhh7sofohk7glv5qnb06l4qkekdu.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBaPqOe6-Fuex5XOvMOW5a3NruZlkXuIy0"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "446742646174-louiqhh7sofohk7glv5qnb06l4qkekdu.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "446742646174-7pi1igrm9rps5glnkb6qute9e9uvikmj.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.fastrucks2"
-              }
-            }
-          ]
-        }
-      }
-    },
     {
       "client_info": {
         "mobilesdk_app_id": "1:446742646174:android:064fc861e5c686bc581a8f",
@@ -50,7 +15,7 @@
       },
       "oauth_client": [
         {
-          "client_id": "446742646174-louiqhh7sofohk7glv5qnb06l4qkekdu.apps.googleusercontent.com",
+          "client_id": "446742646174-gr3nh0t8ht7pgvnl3mmofej16pduoog6.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -63,7 +28,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "446742646174-louiqhh7sofohk7glv5qnb06l4qkekdu.apps.googleusercontent.com",
+              "client_id": "446742646174-gr3nh0t8ht7pgvnl3mmofej16pduoog6.apps.googleusercontent.com",
               "client_type": 3
             },
             {

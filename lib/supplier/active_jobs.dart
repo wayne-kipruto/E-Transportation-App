@@ -27,7 +27,7 @@ class _ActiveJobsState extends State<ActiveJobs> {
         .collection('users')
         .doc(user.uid)
         .collection('myJobs')
-        .doc(user.uid)
+        .doc(myJobsModel.userId)
         .get()
         .then((value) {
       myJobsModel = MyJobsModel.fromMap(value.data());
@@ -51,74 +51,50 @@ class _ActiveJobsState extends State<ActiveJobs> {
         child: StreamBuilder(
           stream: FirebaseFirestore.instance
               .collection('users')
-              .doc(myJobsModel.uid)
+              .doc(user.uid)
+              .collection('myJobs')
+              .doc(myJobsModel.userId)
               .snapshots(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(child: CircularProgressIndicator());
-            } else if (snapshot.hasError) {
-              return Center(child: Text('Error'));
-            } else {
-              var document = snapshot.data!.docs;
-              return ListView.builder(
-                itemCount: snapshot.data!.document,
-                itemBuilder: (BuildContext context, int index) {
-                  final DocumentSnapshot data = snapshot.data!.docs[index];
-                  return Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: ListTile(
-                        dense: false,
-                        visualDensity: VisualDensity(vertical: 4),
-                        title: Text(
-                          "Goods " +
-                              data['goodsSelected'] + // the records in firebase
-                              "\nInfo:" +
-                              data['jobDescription'] +
-                              "\nVehicle Selected: " +
-                              data['vehicleSelected'],
-                          style: GoogleFonts.montserrat(fontSize: 11),
-                        ),
-                        subtitle: Padding(
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 8.0,
-                          ),
-                          child: Text("From:" +
-                              data['delieved From'] +
-                              "To:" +
-                              data['delievered To']),
-                        ),
-                        trailing: IconButton(
-                          onPressed: () {
-                            //function to send info to transporters active jobs
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text('Job Rejected')));
-                          },
-                          icon: Icon(
-                            Icons.cancel_outlined,
-                            color: Colors.red,
-                          ),
-                        ),
-                        leading: IconButton(
-                          onPressed: () {
-                            //function to remove info from their screen
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text('Job Accepted')));
-                          },
-                          icon: Icon(
-                            Icons.check_circle_outline,
-                            color: Colors.lightGreenAccent,
-                          ),
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              );
+          builder: (context, AsyncSnapshot snapshot) {
+            if (snapshot.hasError) {
+              return Text('Error = ${snapshot.error}');
             }
-            //
+            if (snapshot.hasData) {
+              final docs = snapshot.data!.docs;
+
+              return ListView.builder(
+                  itemExtent: 100,
+                  itemCount: docs.length,
+                  itemBuilder: (_, i) {
+                    final data = docs[i].data();
+
+                    return Padding(
+                        padding: EdgeInsets.symmetric(vertical: 8),
+                        child: ListTile(
+                          dense: false,
+                          visualDensity: VisualDensity(
+                            vertical: 4,
+                          ),
+                          title: Text(
+                            "Contact:" +
+                                data['supplierName'] +
+                                "\nGoods: " +
+                                data['goodsSelected'] +
+                                "\nInfo: " +
+                                data['jobDescription'] +
+                                "\nVehicle : " +
+                                data['vehicleSelected'],
+                            style: GoogleFonts.rubik(fontSize: 12),
+                          ),
+                        ));
+                  });
+            }
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
           },
         ),
+        //
       ),
     );
   }
