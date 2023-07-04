@@ -1,7 +1,5 @@
 // ignore_for_file: prefer_const_constructors, prefer_interpolation_to_compose_strings
 
-import 'dart:html';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fastrucks2/pages/Job%20Details/myjobsmodel.dart';
 import 'package:firebase_auth/firebase_auth.dart';

@@ -59,17 +59,10 @@ class _OnboardingPageState extends State<OnboardingPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              // Container(
-              //   alignment: Alignment.centerRight,
-              //   child: ElevatedButton(
-              //     // ignore: avoid_print
-              //     onPressed: () => MaterialPageRoute(builder: (context) {
-              //       return const LoginPage1();
-              //     }),
-              //     child: Text('Skip',
-              //         style: TextStyle(color: Colors.white, fontSize: 22.0)),
-              //   ),
-              // ),
+              Container(
+                alignment: Alignment.centerRight,
+                height: 80,
+              ),
               SizedBox(
                 height: 600,
                 child: PageView(
@@ -91,7 +84,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                           Center(
                             child: Image(
                               image: AssetImage(
-                                'assets/truck.png',
+                                'assets/supplier.png',
                               ),
                               height: 300.0,
                               width: 300.0,
@@ -167,7 +160,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                           Center(
                             child: Image(
                               image: AssetImage(
-                                'assets/driver.png',
+                                'assets/truck.png',
                               ),
                               height: 300.0,
                               width: 300.0,
@@ -200,7 +193,6 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   ],
                 ),
               ),
-
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: _buildPageIndicator(),

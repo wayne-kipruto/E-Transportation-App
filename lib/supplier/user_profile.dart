@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:fastrucks2/onboarding_page.dart';
 import 'package:fastrucks2/pages/Chats/chat_home.dart';
 import 'package:fastrucks2/payments/payments.dart';
 import 'package:fastrucks2/supplier/active_jobs.dart';
@@ -274,8 +275,10 @@ class _UserProfileState extends State<UserProfile> {
               InkWell(
                 onTap: () {
                   FirebaseAuth.instance.signOut();
-                  Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => LoginPage1()));
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => OnboardingPage()));
                 },
                 child: Container(
                   decoration: BoxDecoration(
