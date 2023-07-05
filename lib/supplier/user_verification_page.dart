@@ -8,6 +8,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UserVerificationPage extends StatefulWidget {
   @override
@@ -266,6 +267,9 @@ class _UserVerificationPageState extends State<UserVerificationPage> {
                     child: MaterialButton(
                       onPressed: () async {
                         await savetofirebase();
+                        //this prevents the user from seeing the page again
+                        final prefs = await SharedPreferences.getInstance();
+                        prefs.setBool('showHome', true);
                       },
                       color: Colors.orange[200],
                       child: Padding(
@@ -281,14 +285,21 @@ class _UserVerificationPageState extends State<UserVerificationPage> {
                   SizedBox(width: 20),
                   Padding(
                     padding: const EdgeInsets.only(top: 10.0),
-                    child: MaterialButton(
-                      onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) {
-                          return const UserProfile();
-                        }));
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStatePropertyAll<Color>(
+                          const Color.fromRGBO(255, 204, 128, 1),
+                        ),
+                      ),
+                      onPressed: () async {
+                        //this prevents the user from seeing the page again
+                        final prefs = await SharedPreferences.getInstance();
+                        prefs.setBool('showHome', true);
+
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: (context) => UserProfile(),
+                        ));
                       },
-                      color: Colors.orange[200],
                       child: Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10.0),
                         child: Text('Proceed to profile ',

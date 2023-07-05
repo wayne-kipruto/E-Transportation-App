@@ -18,18 +18,24 @@ Future<void> main() async {
 
   final prefs = await SharedPreferences.getInstance();
   final showLogin = prefs.getBool('showLogin') ?? false;
+  final showHome = prefs.getBool('showHome') ?? false;
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(MyApp(showLogin: showLogin));
+  runApp(MyApp(
+    showLogin: showLogin,
+    showHome: showHome,
+  ));
 }
 
 class MyApp extends StatelessWidget {
   final bool showLogin;
+  final bool showHome;
   const MyApp({
     Key? key,
     required this.showLogin,
+    required this.showHome,
   }) : super(key: key);
 
   @override

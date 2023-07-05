@@ -84,15 +84,15 @@ class _OnboardingPageState extends State<OnboardingPage> {
                           Center(
                             child: Image(
                               image: AssetImage(
-                                'assets/supplier.png',
+                                'assets/truck.png',
                               ),
                               height: 300.0,
                               width: 300.0,
                             ),
                           ),
-                          SizedBox(height: 30.0),
+                          SizedBox(height: 40.0),
                           Text(
-                            'Connect truckers and suppliers',
+                            'We Connect truckers and suppliers',
                             style: GoogleFonts.rajdhani(
                               color: Colors.black,
                               fontWeight: FontWeight.w500,
@@ -104,7 +104,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                             height: 15,
                           ),
                           Text(
-                            'Become a registered supplier to guarantee timely delivery of your products. ',
+                            'Become a registered supplier to guarantee timely delivery of your products. \n\nWe ensure all registered drivers have undergone a rigorous and robust verification process',
                             style: GoogleFonts.montserrat(
                               color: Colors.black,
                               fontSize: 17.0,
@@ -122,7 +122,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                           Center(
                             child: Image(
                               image: AssetImage(
-                                'assets/truck.png',
+                                'assets/supplier.png',
                               ),
                               height: 300.0,
                               width: 300.0,
@@ -160,7 +160,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                           Center(
                             child: Image(
                               image: AssetImage(
-                                'assets/truck.png',
+                                'assets/loading.png',
                               ),
                               height: 300.0,
                               width: 300.0,
@@ -180,7 +180,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                             height: 15,
                           ),
                           Text(
-                            'Register today and find jobs and transporters today. ',
+                            'Register today and find jobs and transporters that help scale your business. ',
                             style: GoogleFonts.montserrat(
                               color: Colors.black,
                               fontSize: 18.0,
@@ -217,14 +217,14 @@ class _OnboardingPageState extends State<OnboardingPage> {
                                 style: GoogleFonts.rajdhani(
                                   color: Colors.black,
                                   fontWeight: FontWeight.w500,
-                                  fontSize: 19.0,
+                                  fontSize: 24.0,
                                 ),
                               ),
                               SizedBox(width: 10.0),
                               Icon(
                                 Icons.arrow_forward,
                                 color: Colors.black,
-                                size: 20.0,
+                                size: 24.0,
                               ),
                             ],
                           ),
@@ -246,6 +246,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                             prefs.setBool('showLogin', true);
 
                             //this pushes the user to the login page
+                            // ignore: use_build_context_synchronously
                             Navigator.of(context)
                                 .pushReplacement(MaterialPageRoute(
                               builder: (context) => LoginPage1(),
@@ -260,13 +261,13 @@ class _OnboardingPageState extends State<OnboardingPage> {
                                 style: GoogleFonts.rajdhani(
                                   color: Colors.black,
                                   fontWeight: FontWeight.w500,
-                                  fontSize: 19,
+                                  fontSize: 24,
                                 ),
                               ),
                               Icon(
                                 Icons.login,
                                 color: Colors.black,
-                                size: 20,
+                                size: 24,
                               )
                             ],
                           ),
