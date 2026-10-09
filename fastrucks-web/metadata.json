@@ -1,0 +1,6 @@
+{
+  "name": "Fastrucks - Freight & Logistics Platform",
+  "description": "Connecting vetted large vehicle transporters and cargo suppliers in Kenya with real-time transit tracking, bidding, e-POD, and M-Pesa payments.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
