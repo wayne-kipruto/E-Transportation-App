@@ -5,6 +5,7 @@ import { SupplierDashboard } from './components/supplier/SupplierDashboard';
 import { TransporterDashboard } from './components/transporter/TransporterDashboard';
 import { AdminDashboard } from './components/admin/AdminDashboard';
 import { Truck, ShieldCheck, Smartphone, MapPin, CheckCircle2 } from 'lucide-react';
+import { OfflineIndicator } from './components/common/OfflineIndicator';
 
 const AppContent: React.FC = () => {
   const { currentUser } = useApp();
@@ -12,6 +13,7 @@ const AppContent: React.FC = () => {
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 flex flex-col font-sans transition-colors">
       <Header />
+      <OfflineIndicator />
 
       {/* Main Role Container */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
